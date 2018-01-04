@@ -19,6 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.logging.HttpLoggingInterceptor
 
 
+// Only modify it from API test cases
+var FLICKR_URL_BASE = "https://api.flickr.com/services/rest/"
 
 interface FlikcrApiService {
 
@@ -47,7 +49,7 @@ interface FlikcrApiService {
                     .build()
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://api.flickr.com/services/rest/" )
+                    .baseUrl(FLICKR_URL_BASE )
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

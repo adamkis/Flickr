@@ -24,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         flickrApiService.getRecentPhotos().enqueue(callback(
-            {r -> Log.i("Flickr", "Yooooooo " + r.body()!!.photos!!.photo!![0].title)},
+            {r ->
+                Log.i("Flickr", "Yooooooo " + r.body()!!.photos!!.photo!![0].title)
+                message2.text = r.body()!!.photos!!.photo!![0].title
+            },
             {t -> Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_SHORT).show()}))
     }
 
