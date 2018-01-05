@@ -30,23 +30,23 @@ class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
     @Suppress("unused") // actually used by Espresso
     @get:Rule
     var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, true, false)
-    private var server: MockWebServer? = null
+    lateinit private var server: MockWebServer
 
     @Before
     @Throws(Exception::class)
     override public fun setUp() {
         super.setUp()
         server = MockWebServer()
-        server!!.start()
+        server.start()
         injectInstrumentation(InstrumentationRegistry.getInstrumentation())
-        FLICKR_URL_BASE = server!!.url("/").toString()
+        FLICKR_URL_BASE = server.url("/").toString()
     }
 
 
     @After
     @Throws(Exception::class)
     public override fun tearDown() {
-        server!!.shutdown()
+        server.shutdown()
     }
 
 
@@ -62,7 +62,7 @@ class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
                 return MockResponse().setResponseCode(404)
             }
         }
-        server!!.setDispatcher(dispatcher)
+        server.setDispatcher(dispatcher)
 
         val intent = Intent()
         mActivityRule.launchActivity(intent)
