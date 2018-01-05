@@ -42,13 +42,16 @@ class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
         FLICKR_URL_BASE = server.url("/").toString()
     }
 
-
     @After
     @Throws(Exception::class)
     public override fun tearDown() {
         server.shutdown()
     }
 
+    private fun getApp(): App {
+        return InstrumentationRegistry.getInstrumentation()
+                .targetContext.applicationContext as App
+    }
 
     @Test
     @Throws(Exception::class)
@@ -63,6 +66,10 @@ class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
             }
         }
         server.setDispatcher(dispatcher)
+
+        val netComponent: NetComponent = getApp().createComponent(server.url("/").toString())
+        getApp().setNetComponent(netComponent)
+//        netComponent.inject(this)
 
         val intent = Intent()
         mActivityRule.launchActivity(intent)
