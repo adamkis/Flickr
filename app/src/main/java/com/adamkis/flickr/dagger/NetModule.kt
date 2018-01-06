@@ -15,7 +15,7 @@ import javax.inject.Singleton
  * Created by adam on 2018. 01. 05..
  */
 @Module
-class NetModule(val mBaseUrl: String) {
+class NetModule(private val baseUrl: String) {
 
     @Provides
     @Singleton
@@ -59,7 +59,7 @@ class NetModule(val mBaseUrl: String) {
     @Singleton
     fun provideRetrofit(gsonConverterFactory: GsonConverterFactory, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(mBaseUrl)
+                .baseUrl(baseUrl)
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)
                 .build()

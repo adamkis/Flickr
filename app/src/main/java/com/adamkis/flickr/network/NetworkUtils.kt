@@ -9,8 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// Only modify it from API test cases
-var FLICKR_URL_BASE = "https://api.flickr.com/services/rest/"
+val FLICKR_URL_BASE = "https://api.flickr.com/services/rest/"
 
 fun <T> callback(success: (Response<T>) -> Unit, failure: (t: Throwable) -> Unit): Callback<T>? {
     return object : Callback<T> {
