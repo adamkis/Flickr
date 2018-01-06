@@ -8,54 +8,30 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.test.InstrumentationTestCase
-import com.adamkis.flickr.network.FLICKR_URL_BASE
 import com.squareup.okhttp.mockwebserver.Dispatcher
 import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer
+import com.squareup.okhttp.mockwebserver.RecordedRequest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import com.squareup.okhttp.mockwebserver.RecordedRequest
 
 /**
  * Created by adam on 2017. 12. 31..
  */
-@RunWith(AndroidJUnit4::class)
-class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
+class MainActivityRESTInstrumentedTest {
 
     @Suppress("unused") // actually used by Espresso
     @get:Rule
     var mActivityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java, true, false)
     lateinit private var server: MockWebServer
+    val app by lazy { InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as App }
 
     @Before
-    @Throws(Exception::class)
-    override public fun setUp() {
-        super.setUp()
+    fun setUp() {
         server = MockWebServer()
         server.start()
-        injectInstrumentation(InstrumentationRegistry.getInstrumentation())
-        FLICKR_URL_BASE = server.url("/").toString()
-    }
-
-    @After
-    @Throws(Exception::class)
-    public override fun tearDown() {
-        server.shutdown()
-    }
-
-    private fun getApp(): App {
-        return InstrumentationRegistry.getInstrumentation()
-                .targetContext.applicationContext as App
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun homeActivity_isCorrectTitleShown() {
         val dispatcher = object : Dispatcher() {
             @Throws(InterruptedException::class)
             override fun dispatch(request: RecordedRequest): MockResponse {
@@ -66,11 +42,16 @@ class MainActivityRESTInstrumentedTest : InstrumentationTestCase() {
             }
         }
         server.setDispatcher(dispatcher)
+        app.setNetComponent(app.createComponent(server.url("/").toString()))
+    }
 
-        val netComponent: NetComponent = getApp().createComponent(server.url("/").toString())
-        getApp().setNetComponent(netComponent)
-//        netComponent.inject(this)
+    @After
+    fun tearDown() {
+        server.shutdown()
+    }
 
+    @Test
+    fun homeActivity_isCorrectTitleShown() {
         val intent = Intent()
         mActivityRule.launchActivity(intent)
 
