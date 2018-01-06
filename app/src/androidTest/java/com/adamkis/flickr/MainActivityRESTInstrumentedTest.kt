@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import com.adamkis.flickr.ui.MainActivity
 import com.squareup.okhttp.mockwebserver.Dispatcher
 import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer
@@ -43,8 +44,7 @@ class MainActivityRESTInstrumentedTest {
         }
         server.setDispatcher(dispatcher)
         app.setNetComponent(app.createComponent(server.url("/").toString()))
-        val intent = Intent()
-        mActivityRule.launchActivity(intent)
+        mActivityRule.launchActivity(Intent())
     }
 
     @After

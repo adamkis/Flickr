@@ -2,6 +2,9 @@ package com.adamkis.flickr
 
 import android.app.Application
 import android.support.annotation.VisibleForTesting
+import com.adamkis.flickr.dagger.DaggerNetComponent
+import com.adamkis.flickr.dagger.NetComponent
+import com.adamkis.flickr.dagger.NetModule
 import com.adamkis.flickr.network.FLICKR_URL_BASE
 
 
@@ -16,12 +19,11 @@ class App : Application() {
     }
 
     fun setNetComponent(netComponent: NetComponent){
-        thsi@App.netComponent = netComponent
+        App.netComponent = netComponent
     }
 
-    fun createComponent(baseUrl: String): NetComponent{
+    fun createComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
-                .appModule(AppModule(this))
                 .netModule(NetModule(baseUrl))
                 .build()
     }

@@ -1,8 +1,7 @@
-package com.adamkis.flickr
+package com.adamkis.flickr.dagger
 
 import com.adamkis.flickr.helper.SecretKeys
 import com.adamkis.flickr.network.RestApi
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -26,12 +25,16 @@ class NetModule(val mBaseUrl: String) {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        // TODO get these interceptors out
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        return httpLoggingInterceptor
+    }
 
-        val queryParamInterceptor = Interceptor { chain ->
+    @Provides
+    @Singleton
+    fun provideInterceptor(): Interceptor {
+        return Interceptor { chain ->
             var request = chain.request()
             val url = request.url().newBuilder()
                     .addQueryParameter("format", "json")
@@ -41,10 +44,14 @@ class NetModule(val mBaseUrl: String) {
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
         }
+    }
 
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(queryParamInterceptor)
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(interceptor)
                 .build()
     }
 
