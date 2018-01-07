@@ -9,10 +9,12 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = arrayOf(
-        MockNetModule::class,
+        MockOkHttpModule::class,
         FlickrInterceptorModule::class,
         GsonConverterFactoryModule::class,
-        LoggingInterceptorModule::class))
+        LoggingInterceptorModule::class,
+        RestApiModule::class,
+        RetrofitModule::class))
 interface MockNetComponent : NetComponent {
     override fun inject(activity: MainActivity)
 }

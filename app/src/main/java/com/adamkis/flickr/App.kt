@@ -22,10 +22,12 @@ class App : Application() {
 
     fun createComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
-                .netModule(NetModule(baseUrl))
+                .okHttpModule(OkHttpModule())
                 .flickrInterceptorModule(FlickrInterceptorModule())
                 .gsonConverterFactoryModule(GsonConverterFactoryModule())
                 .loggingInterceptorModule(LoggingInterceptorModule())
+                .restApiModule(RestApiModule())
+                .retrofitModule(RetrofitModule(baseUrl))
                 .build()
     }
 

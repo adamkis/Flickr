@@ -14,8 +14,7 @@ import javax.inject.Singleton
  * Created by adam on 2018. 01. 05..
  */
 @Module
-class MockNetModule(private val baseUrl: String) {
-
+class MockOkHttpModule() {
     @Provides
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient {
@@ -37,21 +36,4 @@ class MockNetModule(private val baseUrl: String) {
                 .addInterceptor(responseInterceptor)
                 .build()
     }
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(gsonConverterFactory: GsonConverterFactory, okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(gsonConverterFactory)
-                .client(okHttpClient)
-                .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRestApi(retrofit: Retrofit): RestApi {
-        return retrofit.create<RestApi>(RestApi::class.java)
-    }
-
 }

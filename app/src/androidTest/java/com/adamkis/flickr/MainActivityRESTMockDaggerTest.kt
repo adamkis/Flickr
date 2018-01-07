@@ -31,10 +31,12 @@ class MainActivityRESTMockDaggerTest {
     @Before
     fun setUp() {
         val mockNetComponent =  DaggerMockNetComponent.builder()
-                .mockNetModule(MockNetModule(FLICKR_URL_BASE))
+                .mockOkHttpModule(MockOkHttpModule())
                 .flickrInterceptorModule(FlickrInterceptorModule())
                 .gsonConverterFactoryModule(GsonConverterFactoryModule())
                 .loggingInterceptorModule(LoggingInterceptorModule())
+                .restApiModule(RestApiModule())
+                .retrofitModule(RetrofitModule(FLICKR_URL_BASE))
                 .build()
         app.setNetComponent(mockNetComponent)
         activityRule.launchActivity(Intent())

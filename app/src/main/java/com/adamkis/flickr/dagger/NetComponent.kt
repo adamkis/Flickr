@@ -9,10 +9,12 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = arrayOf(
-        NetModule::class,
+        OkHttpModule::class,
         FlickrInterceptorModule::class,
         GsonConverterFactoryModule::class,
-        LoggingInterceptorModule::class))
+        LoggingInterceptorModule::class,
+        RestApiModule::class,
+        RetrofitModule::class))
 interface NetComponent {
     fun inject(activity: MainActivity)
 }
