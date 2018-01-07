@@ -6,9 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 
 android {
     compileSdkVersion 27
@@ -50,4 +50,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestCompile 'com.squareup.okhttp:mockwebserver:2.7.0'
+//    testCompile 'org.mockito:mockito-core:2.13.0'
+
+
 }
