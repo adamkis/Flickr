@@ -2,9 +2,7 @@ package com.adamkis.flickr
 
 import android.app.Application
 import android.support.annotation.VisibleForTesting
-import com.adamkis.flickr.dagger.DaggerNetComponent
-import com.adamkis.flickr.dagger.NetComponent
-import com.adamkis.flickr.dagger.NetModule
+import com.adamkis.flickr.dagger.*
 import com.adamkis.flickr.network.FLICKR_URL_BASE
 
 
@@ -25,6 +23,9 @@ class App : Application() {
     fun createComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
                 .netModule(NetModule(baseUrl))
+                .flickrInterceptorModule(FlickrInterceptorModule())
+                .gsonConverterFactoryModule(GsonConverterFactoryModule())
+                .loggingInterceptorModule(LoggingInterceptorModule())
                 .build()
     }
 
