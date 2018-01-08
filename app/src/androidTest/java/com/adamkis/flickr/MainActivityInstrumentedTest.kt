@@ -11,6 +11,7 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import com.adamkis.flickr.helper.TestUtils
 import com.adamkis.flickr.ui.MainActivity
 import org.junit.Rule
 

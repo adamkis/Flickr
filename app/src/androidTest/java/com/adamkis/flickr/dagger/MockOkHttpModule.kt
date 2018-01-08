@@ -1,13 +1,11 @@
 package com.adamkis.flickr.dagger
 
-import com.adamkis.flickr.TestUtils
-import com.adamkis.flickr.network.RestApi
+import com.adamkis.flickr.helper.MockResponseStrings
+import com.adamkis.flickr.helper.TestUtils
 import dagger.Module
 import dagger.Provides
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
@@ -22,10 +20,10 @@ class MockOkHttpModule() {
             override fun intercept(chain: Interceptor.Chain): Response {
                 return Response.Builder()
                         .code(200)
-                        .message(TestUtils.MOCK_RESPONSE_GETRECENT)
+                        .message(MockResponseStrings.MOCK_RESPONSE_GETRECENT)
                         .request(chain.request())
                         .protocol(Protocol.HTTP_1_0)
-                        .body(ResponseBody.create(MediaType.parse("application/json"), TestUtils.MOCK_RESPONSE_GETRECENT.toByteArray()))
+                        .body(ResponseBody.create(MediaType.parse("application/json"), MockResponseStrings.MOCK_RESPONSE_GETRECENT.toByteArray()))
                         .addHeader("content-type", "application/json")
                         .build()
             }

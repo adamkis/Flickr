@@ -8,6 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import com.adamkis.flickr.helper.MockResponseStrings
 import com.adamkis.flickr.ui.MainActivity
 import com.squareup.okhttp.mockwebserver.Dispatcher
 import com.squareup.okhttp.mockwebserver.MockResponse
@@ -21,7 +22,7 @@ import org.junit.Test
 /**
  * Created by adam on 2017. 12. 31..
  */
-class MainActivityRESTInstrumentedTest {
+class MainActivityMockWebServerInstrumentedTest {
 
     @Suppress("unused") // actually used by Espresso
     @get:Rule
@@ -37,7 +38,7 @@ class MainActivityRESTInstrumentedTest {
             @Throws(InterruptedException::class)
             override fun dispatch(request: RecordedRequest): MockResponse {
                 if (request.path.startsWith("/?method=flickr.photos.getRecent")) {
-                    return MockResponse().setResponseCode(200).setBody(TestUtils.MOCK_RESPONSE_GETRECENT)
+                    return MockResponse().setResponseCode(200).setBody(MockResponseStrings.MOCK_RESPONSE_GETRECENT)
                 }
                 return MockResponse().setResponseCode(404)
             }
