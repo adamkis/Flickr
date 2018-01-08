@@ -1,5 +1,6 @@
 package com.adamkis.flickr.dagger
 
+import com.adamkis.flickr.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -15,9 +16,11 @@ class OkHttpModule() {
     @Provides
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
+        var builder = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .build()
+        if (BuildConfig.DEBUG){
+            builder = builder.addInterceptor(httpLoggingInterceptor)
+        }
+        return builder.build()
     }
 }
