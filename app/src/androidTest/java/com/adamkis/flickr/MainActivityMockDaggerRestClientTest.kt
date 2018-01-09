@@ -43,13 +43,8 @@ class MainActivityMockDaggerRestClientTest {
     }
 
     @Test
-    fun homeActivity_isMessage2TextFound() {
+    fun homeActivity_firstPhotoTitleFound() {
         onView(withText("Pukaskwa Coastal Trail Aug-Sept 2017")).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun homeActivity_isMessage2TextInMessage2Container() {
-        onView(ViewMatchers.withId(R.id.message2)).check(matches(withText("Pukaskwa Coastal Trail Aug-Sept 2017")))
     }
 
 }

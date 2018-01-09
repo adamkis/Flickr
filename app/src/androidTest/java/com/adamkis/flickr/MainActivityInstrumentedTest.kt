@@ -14,6 +14,11 @@ import android.support.test.rule.ActivityTestRule
 import com.adamkis.flickr.helper.TestUtils
 import com.adamkis.flickr.ui.MainActivity
 import org.junit.Rule
+import android.support.test.espresso.matcher.ViewMatchers.withParent
+import android.widget.TextView
+import android.support.test.espresso.Espresso.onView
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.instanceOf
 
 
 /**
@@ -28,18 +33,18 @@ class MainActivityInstrumentedTest {
 
     @Test
     fun homeActivity_Displayed() {
-        onView(withId(R.id.message)).check(matches(withText(TestUtils.getString(R.string.title_home))))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar)))).check(matches(withText(TestUtils.getString(R.string.title_home))))
     }
 
     @Test
     fun homeActivity_BottomNavigationClicks(){
-        onView(withId(R.id.message)).check(matches(withText(TestUtils.getString(R.string.title_home))))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar)))).check(matches(withText(TestUtils.getString(R.string.title_home))))
         onView(withId(R.id.navigation_dashboard)).perform(click())
-        onView(withId(R.id.message)).check(matches(withText(TestUtils.getString(R.string.title_dashboard))))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar)))).check(matches(withText(TestUtils.getString(R.string.title_dashboard))))
         onView(withId(R.id.navigation_notifications)).perform(click())
-        onView(withId(R.id.message)).check(matches(withText(TestUtils.getString(R.string.title_notifications))))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar)))).check(matches(withText(TestUtils.getString(R.string.title_notifications))))
         onView(withId(R.id.navigation_home)).perform(click())
-        onView(withId(R.id.message)).check(matches(withText(TestUtils.getString(R.string.title_home))))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.action_bar)))).check(matches(withText(TestUtils.getString(R.string.title_home))))
     }
 
 }

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
@@ -54,13 +53,8 @@ class MainActivityMockWebServerInstrumentedTest {
     }
 
     @Test
-    fun homeActivity_isMessage2TextFound() {
+    fun homeActivity_firstPhotoTitleFound() {
         onView(withText("Pukaskwa Coastal Trail Aug-Sept 2017")).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun homeActivity_isMessage2TextInMessage2Container() {
-        onView(ViewMatchers.withId(R.id.message2)).check(matches(withText("Pukaskwa Coastal Trail Aug-Sept 2017")))
     }
 
 }
