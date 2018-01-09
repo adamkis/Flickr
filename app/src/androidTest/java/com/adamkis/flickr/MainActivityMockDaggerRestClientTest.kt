@@ -32,7 +32,7 @@ class MainActivityMockDaggerRestClientTest {
     fun setUp() {
         val mockNetComponent =  DaggerMockNetComponent.builder()
                 .mockOkHttpModule(MockOkHttpModule())
-                .flickrInterceptorModule(FlickrInterceptorModule())
+                .formatInterceptorModule(FormatInterceptorModule())
                 .gsonConverterFactoryModule(GsonConverterFactoryModule())
                 .loggingInterceptorModule(LoggingInterceptorModule())
                 .restApiModule(RestApiModule())

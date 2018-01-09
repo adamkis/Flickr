@@ -23,8 +23,8 @@ class App : Application() {
     fun createComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
                 .okHttpModule(OkHttpModule())
-                .flickrInterceptorModule(FlickrInterceptorModule())
-                .tokenInterceptorModule(TokenInterceptorModule())
+                .formatInterceptorModule(FormatInterceptorModule())
+                .apiKeyInterceptorModule(ApiKeyInterceptorModule())
                 .gsonConverterFactoryModule(GsonConverterFactoryModule())
                 .loggingInterceptorModule(LoggingInterceptorModule())
                 .restApiModule(RestApiModule())

@@ -10,8 +10,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         OkHttpModule::class,
-        FlickrInterceptorModule::class,
-        TokenInterceptorModule::class,
+        FormatInterceptorModule::class,
+        ApiKeyInterceptorModule::class,
         GsonConverterFactoryModule::class,
         LoggingInterceptorModule::class,
         RestApiModule::class,

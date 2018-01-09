@@ -17,10 +17,10 @@ import javax.inject.Named
 class OkHttpModule() {
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, @Named("flickr") flickrInterceptor: Interceptor, @Named("token") tokenInterceptor: Interceptor): OkHttpClient {
+    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, @Named("format") formatInterceptor: Interceptor, @Named("apiKey") apiKeyInterceptor: Interceptor): OkHttpClient {
         var builder = OkHttpClient.Builder()
-                .addInterceptor(flickrInterceptor)
-                .addInterceptor(tokenInterceptor)
+                .addInterceptor(formatInterceptor)
+                .addInterceptor(apiKeyInterceptor)
         if (BuildConfig.DEBUG){
             builder = builder.addInterceptor(httpLoggingInterceptor)
         }
