@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(
         OkHttpModule::class,
         FlickrInterceptorModule::class,
+        TokenInterceptorModule::class,
         GsonConverterFactoryModule::class,
         LoggingInterceptorModule::class,
         RestApiModule::class,

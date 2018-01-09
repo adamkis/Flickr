@@ -24,6 +24,7 @@ class App : Application() {
         return DaggerNetComponent.builder()
                 .okHttpModule(OkHttpModule())
                 .flickrInterceptorModule(FlickrInterceptorModule())
+                .tokenInterceptorModule(TokenInterceptorModule())
                 .gsonConverterFactoryModule(GsonConverterFactoryModule())
                 .loggingInterceptorModule(LoggingInterceptorModule())
                 .restApiModule(RestApiModule())

@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 class MockOkHttpModule() {
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, interceptor: Interceptor): OkHttpClient {
+    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, @Named("flickr") interceptor: Interceptor): OkHttpClient {
         val responseInterceptor = object : Interceptor{
             override fun intercept(chain: Interceptor.Chain): Response {
                 return Response.Builder()

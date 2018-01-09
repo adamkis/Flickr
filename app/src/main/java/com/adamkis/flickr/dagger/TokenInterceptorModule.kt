@@ -11,17 +11,16 @@ import javax.inject.Singleton
  * Created by adam on 2018. 01. 07..
  */
 @Module
-class FlickrInterceptorModule() {
+class TokenInterceptorModule() {
     @Provides
     @Singleton
-    @Named("flickr")
-    fun provideFlickrInterceptor(): Interceptor {
+    @Named("token")
+    fun provideTokenInterceptor(): Interceptor {
         return Interceptor { chain ->
+            // TODO Implement proper request: Now it's only a stub
             var request = chain.request()
             val url = request.url().newBuilder()
-                    .addQueryParameter("format", "json")
-                    .addQueryParameter("nojsoncallback", "1")
-                    .addQueryParameter("api_key", SecretKeys.FLICKR_KEY)
+                    .addQueryParameter("random", "random")
                     .build()
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
