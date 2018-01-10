@@ -9,6 +9,7 @@ import com.adamkis.flickr.dagger.glide.GlideComponent
 import com.adamkis.flickr.dagger.glide.GlideModule
 import com.adamkis.flickr.dagger.network.*
 import com.adamkis.flickr.network.FLICKR_URL_BASE
+import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 
 
@@ -53,6 +54,10 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
         Timber.tag("Flickr");
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
 }

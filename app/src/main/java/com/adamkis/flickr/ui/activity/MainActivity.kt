@@ -3,18 +3,9 @@ package com.adamkis.flickr.ui.activity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
-import android.widget.Toast
-import com.adamkis.flickr.App
 import com.adamkis.flickr.R
-import com.adamkis.flickr.network.RestApi
-import com.adamkis.flickr.network.callback
-import com.adamkis.flickr.ui.adapter.RecentsAdapter
 import com.adamkis.flickr.ui.fragment.RecentsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
-import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
