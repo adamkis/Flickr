@@ -8,7 +8,7 @@ package com.adamkis.flickr.model
 data class Photo(var isfamily: String? = null, var farm: String? = null, var id: String? = null, var title: String? = null,
                  var ispublic: String? = null, var owner: String? = null, var secret: String? = null, var server: String? = null, var isfriend: String? = null){
 
-    fun getUrl(): String{
+    fun getUrl(): String {
         // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
         return StringBuilder()
                 .append("https://farm")
@@ -19,6 +19,7 @@ data class Photo(var isfamily: String? = null, var farm: String? = null, var id:
                 .append(id)
                 .append("_")
                 .append(secret)
+                .append(".jpg")
                 .toString()
     }
 }

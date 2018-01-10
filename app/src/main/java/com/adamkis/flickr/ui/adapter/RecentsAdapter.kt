@@ -2,6 +2,7 @@ package com.adamkis.flickr.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Ad
 
         fun bind(photo: Photo?){
             itemView.recentsText.text = photo?.title
-            Glide.with(context).load("http://goo.gl/gEgYUd").into(itemView.findViewById(R.id.image));
+            Glide.with(context).load(photo?.getUrl()).into(itemView.findViewById(R.id.image))
         }
 
     }
