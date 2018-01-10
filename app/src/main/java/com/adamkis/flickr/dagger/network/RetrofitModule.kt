@@ -1,4 +1,4 @@
-package com.adamkis.flickr.dagger
+package com.adamkis.flickr.dagger.network
 
 import dagger.Module
 import dagger.Provides

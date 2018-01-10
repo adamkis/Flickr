@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             {r ->
                 Log.i("Flickr", "First Title " + r.body()!!.photos!!.photo!![0].title)
                 recentsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-                recentsRecyclerView.adapter = RecentsAdapter(r.body()!!.photos!!, this@MainActivity)
+                recentsRecyclerView.adapter = RecentsAdapter(r.body()!!.photos!!)
             },
             {t -> Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_SHORT).show()}))
 

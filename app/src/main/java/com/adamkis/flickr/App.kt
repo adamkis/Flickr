@@ -1,8 +1,13 @@
 package com.adamkis.flickr
 
 import android.app.Application
+import android.content.Context
 import android.support.annotation.VisibleForTesting
 import com.adamkis.flickr.dagger.*
+import com.adamkis.flickr.dagger.glide.DaggerGlideComponent
+import com.adamkis.flickr.dagger.glide.GlideComponent
+import com.adamkis.flickr.dagger.glide.GlideModule
+import com.adamkis.flickr.dagger.network.*
 import com.adamkis.flickr.network.FLICKR_URL_BASE
 
 
@@ -14,13 +19,14 @@ class App : Application() {
     @VisibleForTesting
     companion object {
         lateinit var netComponent: NetComponent
+        lateinit var glideComponent: GlideComponent
     }
 
     fun setNetComponent(netComponent: NetComponent){
         App.netComponent = netComponent
     }
 
-    fun createComponent(baseUrl: String): NetComponent {
+    fun createNetComponent(baseUrl: String): NetComponent {
         return DaggerNetComponent.builder()
                 .okHttpModule(OkHttpModule())
                 .formatInterceptorModule(FormatInterceptorModule())
@@ -32,9 +38,16 @@ class App : Application() {
                 .build()
     }
 
+    fun createGlideComponent(context: Context): GlideComponent {
+        return DaggerGlideComponent.builder()
+                .glideModule(GlideModule(context))
+                .build()
+    }
+
     override fun onCreate() {
         super.onCreate()
-        netComponent = createComponent(FLICKR_URL_BASE)
+        netComponent = createNetComponent(FLICKR_URL_BASE)
+        glideComponent = createGlideComponent(this)
     }
 
 }

@@ -7,10 +7,10 @@ import com.adamkis.flickr.ui.MainActivity
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import com.adamkis.flickr.dagger.*
+import com.adamkis.flickr.dagger.network.*
 import com.adamkis.flickr.network.FLICKR_URL_BASE
 import org.junit.Before
 import org.junit.Rule

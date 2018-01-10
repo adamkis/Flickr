@@ -43,7 +43,7 @@ class MainActivityMockWebServerInstrumentedTest {
             }
         }
         server.setDispatcher(dispatcher)
-        app.setNetComponent(app.createComponent(server.url("/").toString()))
+        app.setNetComponent(app.createNetComponent(server.url("/").toString()))
         mActivityRule.launchActivity(Intent())
     }
 

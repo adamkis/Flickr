@@ -1,5 +1,6 @@
 package com.adamkis.flickr.dagger
 
+import com.adamkis.flickr.dagger.network.*
 import com.adamkis.flickr.ui.MainActivity
 import dagger.Component
 import javax.inject.Singleton
