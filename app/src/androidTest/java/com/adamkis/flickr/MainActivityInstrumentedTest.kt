@@ -12,11 +12,10 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.adamkis.flickr.helper.TestUtils
-import com.adamkis.flickr.ui.MainActivity
+import com.adamkis.flickr.ui.activity.MainActivity
 import org.junit.Rule
 import android.support.test.espresso.matcher.ViewMatchers.withParent
 import android.widget.TextView
-import android.support.test.espresso.Espresso.onView
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.instanceOf
 

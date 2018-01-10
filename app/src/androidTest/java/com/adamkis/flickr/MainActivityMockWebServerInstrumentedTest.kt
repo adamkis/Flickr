@@ -8,7 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.adamkis.flickr.helper.MockResponseStrings
-import com.adamkis.flickr.ui.MainActivity
+import com.adamkis.flickr.ui.activity.MainActivity
 import com.squareup.okhttp.mockwebserver.Dispatcher
 import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer

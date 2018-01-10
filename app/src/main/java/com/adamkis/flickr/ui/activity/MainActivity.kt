@@ -1,10 +1,9 @@
-package com.adamkis.flickr.ui
+package com.adamkis.flickr.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.adamkis.flickr.App
@@ -12,6 +11,7 @@ import com.adamkis.flickr.R
 import com.adamkis.flickr.network.RestApi
 import com.adamkis.flickr.network.callback
 import com.adamkis.flickr.ui.adapter.RecentsAdapter
+import com.adamkis.flickr.ui.fragment.RecentsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -19,26 +19,12 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var restApi: RestApi
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        App.netComponent.inject(this)
-
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         supportActionBar?.title = getString(R.string.title_home)
-
-        restApi.getRecentPhotos().enqueue(callback(
-            {r ->
-                Timber.i( "First Title " + r.body()!!.photos!!.photo!![0].title)
-                recentsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-                recentsRecyclerView.adapter = RecentsAdapter(r.body()!!.photos!!)
-            },
-            {t -> Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_SHORT).show()}))
-
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, RecentsFragment.newInstance()).commit()
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

@@ -1,6 +1,7 @@
 package com.adamkis.flickr.dagger.network
 
-import com.adamkis.flickr.ui.MainActivity
+import com.adamkis.flickr.ui.activity.MainActivity
+import com.adamkis.flickr.ui.fragment.RecentsFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,5 +18,6 @@ import javax.inject.Singleton
         RestApiModule::class,
         RetrofitModule::class))
 interface NetComponent {
-    fun inject(activity: MainActivity)
+    fun inject(mainActivity: MainActivity)
+    fun inject(recentsFragment: RecentsFragment)
 }

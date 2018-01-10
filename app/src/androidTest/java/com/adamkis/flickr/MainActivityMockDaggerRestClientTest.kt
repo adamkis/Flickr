@@ -3,7 +3,7 @@ package com.adamkis.flickr
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
-import com.adamkis.flickr.ui.MainActivity
+import com.adamkis.flickr.ui.activity.MainActivity
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
