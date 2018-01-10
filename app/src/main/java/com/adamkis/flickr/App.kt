@@ -9,6 +9,7 @@ import com.adamkis.flickr.dagger.glide.GlideComponent
 import com.adamkis.flickr.dagger.glide.GlideModule
 import com.adamkis.flickr.dagger.network.*
 import com.adamkis.flickr.network.FLICKR_URL_BASE
+import timber.log.Timber
 
 
 /**
@@ -48,6 +49,10 @@ class App : Application() {
         super.onCreate()
         netComponent = createNetComponent(FLICKR_URL_BASE)
         glideComponent = createGlideComponent(this)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+        Timber.tag("Flickr");
     }
 
 }

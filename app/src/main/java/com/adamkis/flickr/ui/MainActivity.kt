@@ -13,6 +13,7 @@ import com.adamkis.flickr.network.RestApi
 import com.adamkis.flickr.network.callback
 import com.adamkis.flickr.ui.adapter.RecentsAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         restApi.getRecentPhotos().enqueue(callback(
             {r ->
-                Log.i("Flickr", "First Title " + r.body()!!.photos!!.photo!![0].title)
+                Timber.i( "First Title " + r.body()!!.photos!!.photo!![0].title)
                 recentsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
                 recentsRecyclerView.adapter = RecentsAdapter(r.body()!!.photos!!)
             },
