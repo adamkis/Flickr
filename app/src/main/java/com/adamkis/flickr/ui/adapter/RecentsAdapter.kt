@@ -1,8 +1,6 @@
 package com.adamkis.flickr.ui.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +9,9 @@ import com.adamkis.flickr.App
 import com.adamkis.flickr.R
 import com.adamkis.flickr.model.Photo
 import com.adamkis.flickr.model.Photos
-import com.adamkis.flickr.ui.activity.PhotoDetailActivity
 import com.bumptech.glide.RequestManager
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.recents_item.view.*
 import javax.inject.Inject
 
@@ -22,6 +21,8 @@ import javax.inject.Inject
 class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Adapter<RecentsAdapter.RecentsViewHolder>(){
 
     @Inject lateinit var glideReqManager: RequestManager
+    private val clickSubject = PublishSubject.create<Photo>()
+    val clickEvent: Observable<Photo> = clickSubject
 
     init {
         App.glideComponent.inject(this)
@@ -33,23 +34,23 @@ class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: RecentsViewHolder?, position: Int) {
-        holder?.bind(photos?.photo?.get(position))
+        holder?.bind(photos.photo?.get(position))
     }
 
-    override fun getItemCount(): Int = photos?.photo?.size ?: 0
+    override fun getItemCount(): Int = photos.photo?.size ?: 0
 
-    class RecentsViewHolder(val glideReqManager: RequestManager, view: View, val context: Context) : RecyclerView.ViewHolder(view), View.OnClickListener{
+    inner class RecentsViewHolder(val glideReqManager: RequestManager, view: View, val context: Context) : RecyclerView.ViewHolder(view){
+
+        init {
+            itemView.setOnClickListener {
+                clickSubject.onNext(photos.photo!!.get(layoutPosition))
+            }
+        }
 
         fun bind(photo: Photo?){
             itemView.recentsText.text = photo?.title
             glideReqManager.load(photo?.getUrl()).into(itemView.findViewById(R.id.image))
-            itemView.setOnClickListener(this)
         }
-
-        override fun onClick(v: View?) {
-            context.startActivity(Intent(context, PhotoDetailActivity::class.java))
-        }
-
 
     }
 
