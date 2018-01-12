@@ -21,8 +21,8 @@ import javax.inject.Inject
 class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Adapter<RecentsAdapter.RecentsViewHolder>(){
 
     @Inject lateinit var glideReqManager: RequestManager
-    private val clickSubject = PublishSubject.create<Photo>()
-    val clickEvent: Observable<Photo> = clickSubject
+    private val clickSubject = PublishSubject.create<Pair<Photo, View>>()
+    val clickEvent: Observable<Pair<Photo, View>> = clickSubject
 
     init {
         App.glideComponent.inject(this)
@@ -43,7 +43,7 @@ class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Ad
 
         init {
             itemView.setOnClickListener {
-                clickSubject.onNext(photos.photo!!.get(layoutPosition))
+                clickSubject.onNext(Pair<Photo, View>(photos.photo!!.get(layoutPosition), view))
             }
         }
 

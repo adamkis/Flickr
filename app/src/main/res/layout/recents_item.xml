@@ -25,6 +25,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/image"
             app:layout_constraintTop_toTopOf="parent"
+            android:transitionName="Something"
             />
         <ImageView
             android:id="@+id/image"
