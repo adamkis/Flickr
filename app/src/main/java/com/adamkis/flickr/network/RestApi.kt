@@ -1,6 +1,7 @@
 package com.adamkis.flickr.network
 
 import com.adamkis.flickr.model.PhotosResponse
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,6 +11,6 @@ import retrofit2.http.GET
 interface RestApi {
 
     @GET("?method=flickr.photos.getRecent")
-    fun getRecentPhotos(): Call<PhotosResponse>
+    fun getRecentPhotos(): Observable<PhotosResponse>
 
 }
