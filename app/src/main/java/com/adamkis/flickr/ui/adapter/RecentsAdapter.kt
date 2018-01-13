@@ -49,7 +49,7 @@ class RecentsAdapter(val photos: Photos, val context: Context) : RecyclerView.Ad
 
         fun bind(photo: Photo?){
             itemView.recentsText.text = photo?.title
-            glideReqManager.load(photo?.getUrl()).into(itemView.findViewById(R.id.image))
+            glideReqManager.load(photo?.getUrl()).into(itemView.findViewById(R.id.recentsImage))
         }
 
     }

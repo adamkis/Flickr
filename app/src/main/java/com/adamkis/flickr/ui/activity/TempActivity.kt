@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import com.adamkis.flickr.R
+import kotlinx.android.synthetic.main.activity_temp.*
 
 /**
  * Created by adam on 2018. 01. 13..
@@ -24,15 +25,15 @@ class TempActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
         collapsingToolbarLayout!!.title = "TempTitle"
 
-        dynamicToolbarColor()
+//        dynamicToolbarColor()
 
-        toolbarTextAppernce()
+//        toolbarTextAppernce()
     }
 
 

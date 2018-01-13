@@ -4,6 +4,8 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.IdRes
@@ -15,11 +17,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.adamkis.flickr.App
 import com.adamkis.flickr.R
+import com.adamkis.flickr.helper.FilePersistenceHelper
 import com.adamkis.flickr.helper.TransitionHelper
 import com.adamkis.flickr.model.Photo
 import com.adamkis.flickr.model.PhotosResponse
@@ -88,7 +92,7 @@ class RecentsFragment : Fragment() {
         recentsRecyclerView.adapter = RecentsAdapter(r.photos!!, activity as Context)
         clickDisposable = (recentsRecyclerView.adapter as RecentsAdapter).clickEvent
                 .subscribe({
-                    startDetailActivityWithTransition(activity as Activity, it.second.findViewById(R.id.recentsText), it.first)
+                    startDetailActivityWithTransition(activity as Activity, it.second.findViewById(R.id.recentsImage), it.first)
                 })
     }
 
@@ -109,6 +113,10 @@ class RecentsFragment : Fragment() {
                 .toBundle()
 
         // Start the activity with the participants, animating from one to the other.
+        val imageView: ImageView = viewToAnimate as ImageView
+        val drawable: BitmapDrawable = imageView.drawable as BitmapDrawable
+        val recentsImageBitmap: Bitmap = drawable.bitmap
+        FilePersistenceHelper.writeBitmapToFile(activity, recentsImageBitmap)
         val startIntent = PhotoDetailActivity.getStartIntent(activity, photo)
         startActivity(startIntent, animationBundle)
     }
