@@ -26,6 +26,9 @@
         <activity
             android:name=".ui.activity.PhotoDetailActivity"
             android:label="@string/detail"/>
+        <activity
+            android:name=".ui.activity.TempActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

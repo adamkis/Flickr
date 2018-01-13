@@ -1,5 +1,6 @@
 package com.adamkis.flickr.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                this@MainActivity.supportActionBar?.title = getString(R.string.title_dashboard)
+//                this@MainActivity.supportActionBar?.title = getString(R.string.title_dashboard)
+                startActivity(Intent(this@MainActivity, TempActivity::class.java))
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
