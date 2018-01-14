@@ -11,6 +11,7 @@ import com.adamkis.flickr.R
 import com.adamkis.flickr.model.Photo
 import kotlinx.android.synthetic.main.activity_photo_detail.*
 import com.adamkis.flickr.helper.FilePersistenceHelper
+import com.adamkis.flickr.ui.fragment.PhotoDetailFragment
 
 
 /**
@@ -37,7 +38,7 @@ class PhotoDetailActivity : AppCompatActivity(){
 
         header_image.setImageBitmap(bitmap)
 
-        recents_photo_id.text = photo.id
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PhotoDetailFragment.newInstance(photo)).commit()
 
     }
 
