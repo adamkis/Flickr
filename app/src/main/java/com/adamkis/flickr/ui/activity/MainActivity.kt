@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-//                this@MainActivity.supportActionBar?.title = getString(R.string.title_dashboard)
-                startActivity(Intent(this@MainActivity, TempActivity::class.java))
+                this@MainActivity.supportActionBar?.title = getString(R.string.title_dashboard)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
