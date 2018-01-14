@@ -109,7 +109,11 @@ class RecentsFragment : Fragment() {
                         Pair(secondViewToAnimate, activity.getString(R.string.transition_recents_photo_id))
                 ))
                 .toBundle()
-        FilePersistenceHelper.writeBitmapToFile(activity, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
+        try {
+            FilePersistenceHelper.writeBitmapToFile(activity, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
+        } catch (e: TypeCastException) {
+            Timber.d(getStackTrace(e)) // This happens when the image hasn't loaded yet, not saving is enough
+        }
         val startIntent = PhotoDetailActivity.getStartIntent(activity, photo)
         startActivity(startIntent, animationBundle)
     }
