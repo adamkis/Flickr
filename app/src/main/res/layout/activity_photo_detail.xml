@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:transitionName="@string/transition_photo_title"
+                android:transitionName="@string/transition_recents_photo_image"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
@@ -47,6 +47,16 @@
             android:orientation="vertical"
             android:paddingTop="10dp">
 
+            <TextView
+                android:id="@+id/recents_photo_id"
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:transitionName="@string/transition_recents_photo_id"
+                android:layout_gravity="right"
+                android:textSize="14sp"
+                />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

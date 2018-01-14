@@ -33,7 +33,3 @@ data class Photo(var isfamily: String? = null, var farm: String? = null, var id:
                 .toString()
     }
 }
-
-data class Photos(var total: String? = null, var page: String? = null, var pages: String? = null, var photo: Array<Photo>? = null, var perpage: String? = null)
-
-data class PhotosResponse(var photos: Photos? = null, var stat: String? = null)

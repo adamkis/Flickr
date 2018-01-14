@@ -7,13 +7,9 @@ import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.widget.TextView
 import com.adamkis.flickr.R
 import com.adamkis.flickr.model.Photo
-import com.adamkis.flickr.ui.fragment.PhotoDetailFragment
 import kotlinx.android.synthetic.main.activity_photo_detail.*
-import timber.log.Timber
-import android.graphics.BitmapFactory
 import com.adamkis.flickr.helper.FilePersistenceHelper
 
 
@@ -40,6 +36,8 @@ class PhotoDetailActivity : AppCompatActivity(){
         collapsingToolbarLayout!!.title = photo.title
 
         header_image.setImageBitmap(bitmap)
+
+        recents_photo_id.text = photo.id
 
     }
 

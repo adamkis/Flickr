@@ -3,12 +3,9 @@ package com.adamkis.flickr.ui.fragment
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.IdRes
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.util.Pair
@@ -19,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import com.adamkis.flickr.App
 import com.adamkis.flickr.R
@@ -58,7 +54,7 @@ class RecentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recentsRecyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.recentsRecyclerView)
+        val recentsRecyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.recents_recycler_view)
 
         callDisposable = restApi.getRecentPhotos()
                 .subscribeOn(Schedulers.io())
@@ -92,7 +88,7 @@ class RecentsFragment : Fragment() {
         recentsRecyclerView.adapter = RecentsAdapter(r.photos!!, activity as Context)
         clickDisposable = (recentsRecyclerView.adapter as RecentsAdapter).clickEvent
                 .subscribe({
-                    startDetailActivityWithTransition(activity as Activity, it.second.findViewById(R.id.recentsImage), it.first)
+                    startDetailActivityWithTransition(activity as Activity, it.second.findViewById(R.id.recents_image), it.second.findViewById(R.id.recents_photo_id), it.first)
                 })
     }
 
@@ -104,19 +100,16 @@ class RecentsFragment : Fragment() {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun startDetailActivityWithTransition(activity: Activity, viewToAnimate: View, photo: Photo) {
+    private fun startDetailActivityWithTransition(activity: Activity, firstViewToAnimate: View, secondViewToAnimate: View, photo: Photo) {
 
         val animationBundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                 *TransitionHelper.createSafeTransitionParticipants(activity,
                         false,
-                        Pair(viewToAnimate, activity.getString(R.string.transition_photo_title))))
+                        Pair(firstViewToAnimate, activity.getString(R.string.transition_recents_photo_image)),
+                        Pair(secondViewToAnimate, activity.getString(R.string.transition_recents_photo_id))
+                ))
                 .toBundle()
-
-        // Start the activity with the participants, animating from one to the other.
-        val imageView: ImageView = viewToAnimate as ImageView
-        val drawable: BitmapDrawable = imageView.drawable as BitmapDrawable
-        val recentsImageBitmap: Bitmap = drawable.bitmap
-        FilePersistenceHelper.writeBitmapToFile(activity, recentsImageBitmap)
+        FilePersistenceHelper.writeBitmapToFile(activity, ((firstViewToAnimate as ImageView).drawable as BitmapDrawable).bitmap)
         val startIntent = PhotoDetailActivity.getStartIntent(activity, photo)
         startActivity(startIntent, animationBundle)
     }
