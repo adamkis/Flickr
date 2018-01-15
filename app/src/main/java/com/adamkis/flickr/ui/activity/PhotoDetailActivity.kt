@@ -34,7 +34,7 @@ class PhotoDetailActivity : AppCompatActivity(){
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
-        collapsingToolbarLayout!!.title = photo.title
+        collapsingToolbarLayout.title = photo.title
 
         header_image.setImageBitmap(bitmap)
 
