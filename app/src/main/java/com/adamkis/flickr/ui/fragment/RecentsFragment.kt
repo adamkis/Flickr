@@ -3,6 +3,7 @@ package com.adamkis.flickr.ui.fragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -46,10 +47,12 @@ class RecentsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpLoadingAndError(view.findViewById(R.id.loading), view as CoordinatorLayout)
         val recentsRecyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.recents_recycler_view)
         photosResponse = savedInstanceState?.getParcelable(PHOTOS_RESPONSE_KEY)
         if(photosResponse != null){
             setUpAdapter(recentsRecyclerView, photosResponse!!)
+            showLoading(false)
         }
         else{
             downloadData(recentsRecyclerView)
@@ -60,6 +63,8 @@ class RecentsFragment : BaseFragment() {
         callDisposable = restApi.getRecentPhotos()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { showLoading(true) }
+            .doAfterTerminate { showLoading(false) }
             .subscribe(
                 {photosResponse ->
                     this@RecentsFragment.photosResponse = photosResponse
@@ -68,15 +73,13 @@ class RecentsFragment : BaseFragment() {
                 {t ->
                     when(t){
                         is UnknownHostException -> {
-                            Toast.makeText(this@RecentsFragment.activity, t.toString(), Toast.LENGTH_SHORT).show()
-                            Timber.d("UnknownHostException" + getStackTrace(t))
+                            showError(getString(R.string.network_error))
                         }
                         is NullPointerException -> {
-                            Toast.makeText(this@RecentsFragment.activity, t.toString(), Toast.LENGTH_SHORT).show()
-                            Timber.d("NullPointerException" + getStackTrace(t))
+                            showError(getString(R.string.could_not_load_data))
                         }
                         else -> {
-                            Timber.d("Exception caught " + getStackTrace(t))
+                            showError(getString(R.string.error))
                         }
                     }
                 }
