@@ -9,7 +9,7 @@ An Android demo app for a Flickr client
 
 ### Video:
 <p align="center">
-  <img src="https://i.imgur.com/cZRwYFd.gifv" width="250">
+  <img src="https://i.imgur.com/cZRwYFd.gif" width="250">
 </p>
 
 ## Libraries used:
