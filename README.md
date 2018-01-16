@@ -8,9 +8,7 @@ An Android demo app for a Flickr client
 </p>
 
 ### Video:
-<p align="center">
-  <img src="https://i.imgur.com/cZRwYFd.gif" width="250">
-</p>
+![Sample Gif](https://i.imgur.com/cZRwYFd.gif)
 
 ## Libraries used:
 - Retrofit2
