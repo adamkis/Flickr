@@ -1,12 +1,12 @@
 package com.adamkis.flickr.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.adamkis.flickr.R
 import com.adamkis.flickr.ui.fragment.RecentsFragment
+import com.adamkis.flickr.ui.fragment.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -19,13 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        supportActionBar?.title = getString(R.string.title_home)
-        activeFragment =
-            if (savedInstanceState != null)
-                supportFragmentManager.getFragment(savedInstanceState, ACTIVE_FRAGMENT_KEY)
-            else
-                RecentsFragment.newInstance()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, activeFragment).commit()
+        replaceFragment(
+            if(savedInstanceState != null) supportFragmentManager.getFragment(savedInstanceState, ACTIVE_FRAGMENT_KEY)
+            else RecentsFragment.newInstance()
+        )
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -33,18 +30,25 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.putFragment(outState, ACTIVE_FRAGMENT_KEY, activeFragment);
     }
 
+    private fun replaceFragment(fragment: Fragment){
+        activeFragment = fragment
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, activeFragment).commit()
+        supportActionBar?.title = when ( activeFragment ){
+            is SearchFragment -> getString(R.string.title_search)
+            else -> getString(R.string.title_home)
+        }
+    }
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 this@MainActivity.supportActionBar?.title = getString(R.string.title_home)
+                replaceFragment(RecentsFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                this@MainActivity.supportActionBar?.title = getString(R.string.title_dashboard)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                this@MainActivity.supportActionBar?.title = getString(R.string.title_notifications)
+            R.id.navigation_search -> {
+                this@MainActivity.supportActionBar?.title = getString(R.string.title_search)
+                replaceFragment(SearchFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
         }
