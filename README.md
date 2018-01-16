@@ -16,6 +16,18 @@ An Android demo app for a Flickr client
 - Espresso
 - MockWebServer
 
+### Setup networking with your Flickr API Key:
+- [Get your API Key](https://www.flickr.com/services/apps/create/apply/)
+- Create ```SecretKeys.kt```  in  ```/app/src/main/java/com/adamkis/flickr/helper/```
+- Add the code below:
+```
+package com.adamkis.flickr.helper
+
+object SecretKeys {
+    val FLICKR_KEY: String = "YOUR SECRET KEY"
+}
+```
+
 ### APK:
 - [DOWNLOAD](https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/flickr-app-debug.apk)
 
