@@ -1,11 +1,11 @@
 # Flickr Demo App
 An Android demo app for a Flickr client
 
-![alt text](./extraFiles/recents.jpg)
-
-![alt text](./extraFiles/photo_detail.jpg)
-
-![alt text](./extraFiles/photo_detail_collapsed.jpg)
+<p align="center">
+  <img src="https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/recents.jpg" width="250">
+  <img src="https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/photo_detail.jpg" width="250">
+  <img src="https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/photo_detail_collapsed.jpg" width="250">
+</p>
 
 ## Libraries used:
 - Retrofit2
