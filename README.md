@@ -7,6 +7,9 @@ An Android demo app for a Flickr client
   <img src="https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/photo_detail_collapsed.jpg" width="250">
 </p>
 
+### Video:
+[![Watch the video](https://i.imgur.com/cZRwYFd.gifv)]
+
 ## Libraries used:
 - Retrofit2
 - Dagger2
