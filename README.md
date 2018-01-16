@@ -16,6 +16,9 @@ An Android demo app for a Flickr client
 - Espresso
 - MockWebServer
 
+### APK:
+- [DOWNLOAD](https://github.com/adamkis/Flickr/blob/prototyping/extraFiles/flickr-app-debug.apk)
+
 ### License
 ```
    Copyright (C) 2017 Adam Kis
