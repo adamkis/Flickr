@@ -7,4 +7,7 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Created by adam on 2017. 01. 14..
  */
-data class PhotosResponse(var photos: Photos? = null, var stat: String? = null)
+
+@SuppressLint("ParcelCreator")
+@Parcelize
+data class PhotosResponse(var photos: Photos? = null, var stat: String? = null) : Parcelable

@@ -7,4 +7,7 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Created by adam on 2017. 01. 14..
  */
-data class Photos(var total: String? = null, var page: String? = null, var pages: String? = null, var photo: Array<Photo>? = null, var perpage: String? = null)
+
+@SuppressLint("ParcelCreator")
+@Parcelize
+data class Photos(var total: String? = null, var page: String? = null, var pages: String? = null, var photo: Array<Photo>? = null, var perpage: String? = null) : Parcelable
