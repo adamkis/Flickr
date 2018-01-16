@@ -34,8 +34,7 @@ class PhotoDetailActivity : AppCompatActivity(){
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
-        collapsingToolbarLayout.title = photo.title
-
+        collapsingToolbarLayout.title = if (photo.title.isNullOrBlank()) getString(R.string.photo_detail) else photo.title
         header_image.setImageBitmap(bitmap)
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, PhotoDetailFragment.newInstance(photo)).commit()
