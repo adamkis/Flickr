@@ -34,8 +34,6 @@ object FilePersistenceHelper{
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        // Delete file
-        File(context.filesDir.absolutePath, HEADER_IMAGE_BITMAP_FILENAME).delete()
         return bmp
     }
 
